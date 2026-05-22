@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auth App
 
-## Getting Started
+Aplicación web de autenticación completa con login social y credenciales.
 
-First, run the development server:
+Plataforma de autenticación moderna construida con Next.js que permite a los usuarios registrarse e iniciar sesión mediante email/contraseña o con su cuenta de GitHub, con acceso a un dashboard privado protegido.
+
+## Despliegue
+
+| | URL |
+|---|---|
+| Frontend | Vercel |
+
+## Características
+
+1. Autenticación con email y contraseña usando Firebase Auth
+2. Login social con GitHub mediante OAuth 2.0
+3. Dashboard privado protegido por Middleware de Next.js
+
+## Tecnologías
+
+### Frontend
+
+| Tecnología | Uso |
+|---|---|
+| Next.js 15 | Framework principal con App Router |
+| TypeScript | Tipado estático del código |
+| Tailwind CSS | Estilos y diseño de la interfaz |
+
+### Backend
+
+| Tecnología | Uso |
+|---|---|
+| NextAuth.js | Gestión de sesiones y OAuth |
+| Firebase Auth | Validación de credenciales email/contraseña |
+| Next.js API Routes | Endpoints de autenticación |
+
+### Auxiliares
+
+| Tecnología | Uso |
+|---|---|
+| Vercel | Despliegue en producción |
+| JWT | Tokens de sesión firmados |
+| Middleware Edge | Protección de rutas privadas |
+
+## Estructura del proyecto
+
+auth-app/
+├── app/
+│   ├── api/
+│   │   └── auth/
+│   │       └── [...nextauth]/
+│   │           └── route.ts        # Handler de NextAuth
+│   ├── dashboard/
+│   │   └── page.tsx                # Área privada protegida
+│   ├── login/
+│   │   └── page.tsx                # Página de inicio de sesión
+│   ├── register/
+│   │   └── page.tsx                # Página de registro
+│   ├── layout.tsx                  # Layout principal con SessionProvider
+│   └── page.tsx                    # Landing pública
+├── components/
+│   ├── navbar.tsx                  # Navbar con logout
+│   └── providers.tsx               # SessionProvider wrapper
+├── docs/
+│   └── seguridad/
+│       ├── oauth.md                # Análisis del flujo OAuth 2.0
+│       ├── middleware.md           # Middleware vs protección cliente
+│       └── credenciales.md        # Hashing y seguridad de contraseñas
+├── middleware.ts                   # Protección de rutas privadas
+├── .env.local                      # Variables de entorno
+└── README.md
+
+## Descargar y ejecutar
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/TU_USUARIO/auth-app.git
+cd auth-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Crea un archivo `.env.local` con tus claves:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=tu_secret
+GITHUB_ID=tu_github_client_id
+GITHUB_SECRET=tu_github_client_secret
+NEXT_PUBLIC_FIREBASE_API_KEY=tu_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=tu_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=tu_firebase_project_id
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+## Desplegar en Vercel
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Importa el repositorio en [vercel.com](https://vercel.com)
+2. Añade las variables de entorno del `.env.local` en el panel de Vercel
+3. Cambia `NEXTAUTH_URL` al dominio de producción que Vercel asigne
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Desarrollado durante las prácticas en Corner Estudios — Sanae — 2026
